@@ -3,8 +3,8 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Image url</dt>
-  <dd><%= @photo.image_url %></dd>
+  <dt>Image</dt>
+  <dd><img src="<%= @photo.image_url %>" width="320"></dd>
 
   <dt>Caption</dt>
   <dd><%= @photo.caption %></dd>
@@ -13,3 +13,12 @@
   <dd><%= @photo.user_id %></dd>
 
 </dl>
+
+<ul>
+   <% @photo.comments.each do |comment| %>
+     <li>
+       <h4><%= User.find(comment.user_id).email %></h4>
+       <p><%= comment.content %></p>
+     </li>
+   <% end %>
+ </ul>
