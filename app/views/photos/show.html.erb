@@ -1,5 +1,8 @@
 <div class="page-header">
-  <h1>Photo #<%= @photo.id %></h1>
+  <h1>
+    Photo #<%= @photo.id %>
+    <a href="/create_favorite?photo_id=<%= @photo.id %>" class="btn btn-success">Make Favorite</a>
+  </h1>
 </div>
 
 <dl class="dl-horizontal">
@@ -17,8 +20,22 @@
 <ul>
    <% @photo.comments.each do |comment| %>
      <li>
-       <h4><%= User.find(comment.user_id).email %></h4>
+       <h4><%= comment.user.email %></h4>
        <p><%= comment.content %></p>
      </li>
    <% end %>
- </ul>
+
+
+  <li>
+     <form action="/create_comment">
+       <textarea id="content" name="content" placeholder="Add your comment" class="form-control" rows="3"></textarea>
+
+       <input type="hidden" id="photo_id" name="photo_id" value="<%= @photo.id %>">
+
+       <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
+
+       <input type="submit" value="Create Comment" class="btn btn-primary">
+     </form>
+   </li>
+
+</ul>
